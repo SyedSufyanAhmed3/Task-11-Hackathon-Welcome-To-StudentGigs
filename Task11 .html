@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentGig - Peer-to-Peer Student Services</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal active">
+        <div class="modal-content auth-modal">
+            <span class="close" onclick="toggleAuth()">&times;</span>
+            <h2>Welcome to StudentGig</h2>
+            <div class="auth-tabs">
+                <button class="tab active" onclick="switchTab('login')">Login</button>
+                <button class="tab" onclick="switchTab('signup')">Sign Up</button>
+            </div>
+            <form id="authForm">
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <input type="text" id="username" placeholder="Username" style="display: none;">
+                <input type="text" id="studentId" placeholder="Student ID" style="display: none;">
+                <button type="submit" id="authBtn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div class="container" id="mainApp" style="display: none;">
+        <nav class="navbar">
+            <h2>🎓 StudentGig</h2>
+            <div class="user-info">
+                <span id="userName"></span>
+                <span id="userRole"></span>
+                <button onclick="logout()">Logout</button>
+            </div>
+        </nav>
+
+        <!-- Tabs -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="showSection('board')">Gig Board</button>
+            <button class="tab-btn" onclick="showSection('post')">Post Gig</button>
+            <button class="tab-btn" onclick="showSection('bids')">My Bids</button>
+            <button class="tab-btn" onclick="showSection('portfolio')">Portfolio</button>
+        </div>
+
+        <!-- Gig Board -->
+        <div id="board-section" class="section active">
+            <div class="search-bar">
+                <input type="text" id="gigSearch" placeholder="Search gigs...">
+                <select id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="coding">Coding</option>
+                    <option value="design">Design</option>
+                    <option value="writing">Writing</option>
+                    <option value="tutoring">Tutoring</option>
+                </select>
+            </div>
+            <div id="gigList" class="gig-grid"></div>
+        </div>
+
+        <!-- Post Gig -->
+        <div id="post-section" class="section">
+            <div class="form-container">
+                <h3>Post New Gig</h3>
+                <form id="postGigForm">
+                    <input type="text" id="gigTitle" placeholder="Gig Title" required>
+                    <select id="gigCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="coding">Coding</option>
+                        <option value="design">Design</option>
+                        <option value="writing">Writing</option>
+                        <option value="tutoring">Tutoring</option>
+                    </select>
+                    <textarea id="gigDesc" placeholder="Detailed description..." required></textarea>
+                    <input type="number" id="budget" placeholder="Budget ($)" required>
+                    <input type="date" id="deadline" required>
+                    <button type="submit">Post Gig</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- My Bids -->
+        <div id="bids-section" class="section">
+            <h3>My Bids & Gigs</h3>
+            <div id="bidsList" class="gig-grid"></div>
+        </div>
+
+        <!-- Portfolio -->
+        <div id="portfolio-section" class="section">
+            <h3>My Portfolio</h3>
+            <div id="portfolioList" class="gig-grid"></div>
+        </div>
+    </div>
+
+    <!-- Bid Modal -->
+    <div id="bidModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3 id="bidGigTitle"></h3>
+            <form id="bidForm">
+                <input type="number" id="bidAmount" placeholder="Your Price ($)" step="0.01" required>
+                <input type="number" id="bidTime" placeholder="Estimated Hours" required>
+                <textarea id="bidProposal" placeholder="Why should they choose you?" required></textarea>
+                <button type="submit">Submit Bid</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
